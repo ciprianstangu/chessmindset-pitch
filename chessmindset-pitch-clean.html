@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChessMindset Academy - Pitch Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --blue: #1e40af;
+            --amber: #f59e0b;
+            --purple: #8b7ac4;
+            --lavender: #e8e4f3;
+            --gray: #64748b;
+            --dark: #0f172a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #f8f9fc 0%, var(--lavender) 50%, #f0f1f7 100%);
+            color: var(--dark);
+            overflow: hidden;
+        }
+
+        /* Subtle Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(139, 122, 196, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 64, 175, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 4rem;
+            position: relative;
+        }
+
+        /* Content Container */
+        .content-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem 3.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+            max-width: 1400px;
+            min-height: 85vh;
+            width: 95%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Typography */
+        h1, h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); }
+        h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
+        h3 { 
+            font-size: clamp(1.3rem, 2vw, 1.8rem); 
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        p {
+            font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+            line-height: 1.65;
+            color: var(--dark);
+            opacity: 0.9;
+        }
+
+        .accent { color: var(--amber); font-weight: 700; }
+        .accent-blue { color: var(--blue); font-weight: 700; }
+        .accent-purple { color: var(--purple); font-weight: 700; }
+
+        /* Logo */
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-chess { color: var(--dark); }
+        .logo-mindset { color: var(--amber); }
+
+        /* Image Cards */
+        .image-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(139, 122, 196, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Stats Card */
+        .stat-card {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(139, 122, 196, 0.08));
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(30, 64, 175, 0.15);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--amber);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            font-style: italic;
+            border-left: 5px solid var(--amber);
+            padding-left: 2.5rem;
+            font-size: 1.35rem;
+            line-height: 1.75;
+            margin: 2rem 0;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(139, 122, 196, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+            border-color: var(--amber);
+        }
+
+        /* Screenshot Showcase */
+        .screenshot-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .screenshot-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(139, 122, 196, 0.2);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-card-content {
+            padding: 1.5rem;
+        }
+
+        /* Spotify/Podcast Section */
+        .spotify-section {
+            background: linear-gradient(135deg, rgba(139, 122, 196, 0.12), rgba(30, 64, 175, 0.08));
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            border: 1px solid rgba(139, 122, 196, 0.25);
+        }
+
+        .podcast-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1DB954, #1ed760);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(29, 185, 84, 0.3);
+        }
+
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(139, 122, 196, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--amber);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--amber);
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--amber), #fbbf24);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-size: 1.5rem;
+        }
+
+        .new-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--amber);
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(139, 122, 196, 0.3);
+            border: 2px solid rgba(139, 122, 196, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dot:hover {
+            transform: scale(1.3);
+            background: rgba(139, 122, 196, 0.6);
+        }
+
+        .dot.active {
+            background: var(--amber);
+            border-color: var(--amber);
+            transform: scale(1.5);
+        }
+
+        .dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .dot:hover::after {
+            opacity: 1;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        ul li {
+            padding: 0.6rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--amber);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Text Center */
+        .text-center { text-align: center; }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--amber));
+            transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: 1000;
+        }
+
+        /* Navigation Hint */
+        .nav-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.85);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.85rem;
+            z-index: 100;
+            display: flex;
+            gap: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-hint kbd {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-box {
+                padding: 2.5rem 2rem;
+            }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print */
+        @media print {
+            body { overflow: visible; }
+            .slides-wrapper { display: block; transform: none !important; }
+            .slide { page-break-after: always; }
+            .nav-dots, .nav-hint, .progress-bar { display: none; }
+        }
+        @page { size: landscape; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="presentation-container">
+        <div class="slides-wrapper" id="slidesWrapper">
+            
+            <!-- SLIDE 1: COVER -->
+            <div class="slide">
+                <div class="content-box text-center fade-in">
+                    <div class="logo">
+                        <span class="logo-chess">Chess</span><span class="logo-mindset">Mindset</span><span class="logo-chess">.academy</span>
+                    </div>
+                    <div style="font-size: 1.5rem; color: var(--blue); font-weight: 700; letter-spacing: 2px; margin-bottom: 1.5rem; text-transform: uppercase;">
+                        AI-Native Chess Education
+                    </div>
+                    <h1>Unde Campionii Învață<br>Să <span class="accent">Gândească</span></h1>
+                    <p style="font-size: 1.5rem; margin: 2rem auto; max-width: 900px;">
+                        Predăm <strong>restul de 80%</strong>: reziliența mentală, psihologia victoriei și curajul de a încerca din nou
+                    </p>
+                    
+                    <div class="image-card" style="max-width: 700px; margin: 3rem auto 0;">
+                        <img src="hero-brain-chess.png" alt="AI Chess Mind">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: THE STORY -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Fiecare Călătorie de Campion<br>Începe Cu O <span class="accent">Pierdere</span></h2>
+                    
+                    <div class="quote-box" style="text-align: center; border-left: none; padding-left: 0;">
+                        "La 10 ani, era campioană națională.<br><br>
+                        Victoriile erau superbe.<br>
+                        Dar înfrângerile? Devastatoare.<br><br>
+                        Nu pentru că nu știa șah.<br>
+                        Ci pentru că nimeni nu o învățase cum să gestioneze presiunea."
+                    </div>
+                    
+                    <div class="image-card" style="max-width: 900px; margin: 2rem auto;">
+                        <img src="champion-journey-path.png" alt="Champion's Journey">
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: center; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(30, 64, 175, 0.08)); padding: 2rem; border-radius: 20px; border: 2px solid rgba(245, 158, 11, 0.3);">
+                        <p style="font-size: 1.6rem; font-weight: 700; line-height: 1.5;">
+                            <span class="accent">Măiestria în șah este 80% reziliență mentală</span><br>
+                            <span style="font-size: 1.3rem; opacity: 0.9;">Restul sunt cunoștințe.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: THE PROBLEM -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Educația în Șah a Predat<br>Greșit <span class="accent">80%</span></h2>
+                    
+                    <div class="grid-2" style="margin-top: 3rem;">
+                        <div class="stat-card">
+                            <h3>📚 Jocul Mental Ignorat</h3>
+                            <div class="stat-number">70%</div>
+                            <p>dintre partidele de șah sunt decise prin erori psihologice, nu greșeli tactice</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>💔 Frustrare Mentală</h3>
+                            <div class="stat-number">3x</div>
+                            <p>Jucătorii juniori renunță din cauza frustrării mentale vs. lipsa de abilitate</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <p style="font-style: italic; font-size: 1.5rem; color: var(--purple);">
+                            <em>"The hardest game to win is a won game"</em><br>
+                            <span style="font-size: 1.1rem;">— GM Emanuel Lasker</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: THE SOLUTION -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">ChessMindset Academy:<br>Predăm <span class="accent">80% Lipsă</span></h2>
+                    
+                    <div class="grid-2" style="margin-top: 2.5rem;">
+                        <div class="image-card">
+                            <img src="interactive-tech-board.png" alt="Interactive Technology">
+                            <div style="padding: 1rem 0;">
+                                <h3>🎯 Tehnologie Interactivă</h3>
+                                <p>Platformă AI-native cu tablă interactivă, feedback în timp real și lecții audio în stil antrenor</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="feature-card" style="margin-bottom: 1.5rem;">
+                                <h3>🎙️ Lecții Audio + Interactive</h3>
+                                <ul>
+                                    <li>Voce naturală (RO/EN)</li>
+                                    <li>Ghidare pas cu pas</li>
+                                    <li>Feedback instant</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card">
+                                <h3>🎯 Ecosistem Complet</h3>
+                                <ul>
+                                    <li>2.5M+ puzzle-uri</li>
+                                    <li>Opening repertoire</li>
+                                    <li>Quiz-uri interactive</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5A: PLATFORM - LANDING & LANGUAGE -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Platformă Live: <span class="accent">Landing & Multi-Language</span></h2>
+                    <p class="text-center" style="font-size: 1.3rem; margin-bottom: 2.5rem; opacity: 0.8;">
+                        Bilingv (RO/EN) • Professional Design • Clear Messaging
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+                        <div class="screenshot-card">
+                            <img src="app-landing-ro.png" alt="Landing Page RO" style="height: 350px;">
+                            <div class="screenshot-card-content">
+                                <h3>🇷🇴 Landing Page RO</h3>
+                                <p>Hero section cu mesaj clar: "Unde campionii învață să gândească" + CTA direct</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="app-landing-en.png" alt="Landing EN" style="height: 350px;">
+                            <div class="screenshot-card-content">
+                                <h3>🇬🇧 English Version</h3>
+                                <p>Multi-language ready - expansion către piețe internaționale (UK, DE, FR)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2.5rem; text-align: center;">
+                        <p style="font-size: 1.1rem; font-weight: 600; color: var(--gray);">
+                            1/3 • Swipe → pentru mai multe module
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5B: PLATFORM - CORE LEARNING -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Platformă Live: <span class="accent">Core Learning</span></h2>
+                    <p class="text-center" style="font-size: 1.3rem; margin-bottom: 2.5rem; opacity: 0.8;">
+                        Interactive Lessons • 2.5M+ Puzzles • Progress Tracking
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+                        <div class="screenshot-card">
+                            <img src="app-academy.png" alt="Academy" style="height: 350px;">
+                            <div class="screenshot-card-content">
+                                <h3>📚 Academy Modules</h3>
+                                <p>4 module complete cu audio lessons, progress tracking și interactive exercises</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="app-puzzles.png" alt="Puzzles" style="height: 350px;">
+                            <div class="screenshot-card-content">
+                                <h3>🧩 Puzzle Solver</h3>
+                                <p>2.5M+ tactical exercises cu difficulty levels și instant feedback</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2.5rem; text-align: center;">
+                        <p style="font-size: 1.1rem; font-weight: 600; color: var(--gray);">
+                            2/3 • Swipe → pentru features avansate
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5C: PLATFORM - ADVANCED FEATURES -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Platformă Live: <span class="accent">Advanced Features</span></h2>
+                    <p class="text-center" style="font-size: 1.3rem; margin-bottom: 2.5rem; opacity: 0.8;">
+                        Opening Repertoire • Knowledge Reinforcement
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;">
+                        <div class="screenshot-card">
+                            <img src="app-openings.png" alt="Openings" style="height: 350px;">
+                            <div class="screenshot-card-content">
+                                <h3>♟️ Openings Lab</h3>
+                                <p>Interactive repertoire builder cu move-by-move explanations</p>
+                            </div>
+                        </div>
+                        <div class="screenshot-card">
+                            <img src="app-quiz.png" alt="Quiz Hub" style="height: 350px;">
+                            <div class="screenshot-card-content">
+                                <h3>🎯 Quiz Hub</h3>
+                                <p>Knowledge reinforcement prin quizzes interactive cu scoring</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2.5rem; text-align: center; background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(139, 122, 196, 0.08)); padding: 1.5rem; border-radius: 15px;">
+                        <p style="font-size: 1.2rem; font-weight: 600; color: var(--blue);">
+                            ✅ Funcțional • ✅ Testat • ✅ Ready for Scale
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: MINDHUB + SPOTIFY -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center" style="color: var(--purple); margin-bottom: 2rem;">MindHub: <span class="accent">80% Lipsă</span></h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                        <div class="image-card">
+                            <img src="app-mindhub.png" alt="MindHub Interface" style="height: 240px; object-fit: cover;">
+                            <div style="padding: 1rem 0;">
+                                <h3>📖 Centrul de Psihologie</h3>
+                                <p>Articole despre reziliență, tilt control, growth mindset</p>
+                            </div>
+                        </div>
+                        <div class="image-card">
+                            <img src="mindhub-psychology-audio.png" alt="Audio & Podcast" style="height: 240px; object-fit: cover;">
+                            <div style="padding: 1rem 0;">
+                                <h3>🎧 Audio + Spotify</h3>
+                                <p>Lecții audio în stil podcast distribuite pe Spotify</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(139, 122, 196, 0.12), rgba(30, 64, 175, 0.08)); padding: 2rem; border-radius: 20px; border: 1px solid rgba(139, 122, 196, 0.25);">
+                        <div style="display: flex; align-items: center; gap: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #1DB954, #1ed760); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0;">🎙️</div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Podcast-Style Audio Lessons</h3>
+                                <p style="font-size: 1.05rem; margin-bottom: 0.75rem;">
+                                    <strong>8 minute de citit</strong> devin <strong>36 minute de podcast tactic</strong>
+                                </p>
+                                <p style="font-size: 0.95rem; opacity: 0.9;">
+                                    ✓ Disponibil pe Spotify • ✓ Încorporat în platformă • ✓ RO (EN în Q3 2026)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1.5rem; padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px; border: 2px solid rgba(245, 158, 11, 0.3);">
+                        <p style="font-size: 1.3rem; font-weight: 700; font-style: italic;">
+                            "Predăm în sfârșit 80% care creează campioni: Reziliență, curaj și voința de a încerca din nou."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: BUSINESS MODEL -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Model Freemium</h2>
+                    <p class="text-center" style="font-size: 1.3rem; margin-bottom: 2rem;">
+                        Prețuri Membru Fondator — Blochează Această Rată Pentru Totdeauna
+                    </p>
+                    
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--blue);">Explorer</h3>
+                            <div class="new-price" style="margin: 1.5rem 0;">Free</div>
+                            <p style="margin-bottom: 1.5rem;">Perfect pentru început</p>
+                            <ul style="text-align: left; font-size: 1rem;">
+                                <li>Lecții limitate</li>
+                                <li>100 puzzle-uri/zi</li>
+                                <li>Progress tracking</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pricing-card featured">
+                            <div class="pricing-badge">🔥 FONDATOR</div>
+                            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--amber);">Starter</h3>
+                            <div class="price">
+                                <span class="old-price">€5</span>
+                                <span class="new-price">€2</span>
+                            </div>
+                            <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">/lună</p>
+                            <ul style="text-align: left; font-size: 1rem;">
+                                <li>Toate lecțiile</li>
+                                <li>Puzzle-uri nelimitate</li>
+                                <li>Opening courses</li>
+                                <li>Quiz Hub</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pricing-card featured">
+                            <div class="pricing-badge">🔥 FONDATOR</div>
+                            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--purple);">Premium</h3>
+                            <div class="price">
+                                <span class="old-price">€7</span>
+                                <span class="new-price">€4</span>
+                            </div>
+                            <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">/lună</p>
+                            <ul style="text-align: left; font-size: 1rem;">
+                                <li>Tot din Starter</li>
+                                <li><strong>MindHub</strong></li>
+                                <li>Audio + Spotify</li>
+                                <li>AI Playground (Q3)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: COMPETITIVE ADVANTAGE -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center" style="margin-bottom: 1.5rem;">Ce Ne Face <span class="accent">Unici</span></h2>
+                    
+                    <div class="image-card" style="max-width: 800px; margin: 0 auto 2rem;">
+                        <img src="breaking-barriers.png" alt="Breaking Barriers" style="height: 260px; object-fit: contain;">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="feature-card" style="padding: 1.5rem;">
+                            <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">🧠 Psychology-First</h3>
+                            <p style="font-size: 1rem;">MindHub predă 80% care contează — reziliența mentală care transformă jucători în campioni</p>
+                        </div>
+                        <div class="feature-card" style="padding: 1.5rem;">
+                            <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">🤖 AI-Native</h3>
+                            <p style="font-size: 1rem;">Platformă construită CU AI de la început. Generare conținut de 10x mai rapidă decât competiția</p>
+                        </div>
+                        <div class="feature-card" style="padding: 1.5rem;">
+                            <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">🎙️ Audio + Spotify</h3>
+                            <p style="font-size: 1rem;">Podcast-style lessons embedded în platformă + distribuit pe Spotify pentru reach maxim</p>
+                        </div>
+                        <div class="feature-card" style="padding: 1.5rem;">
+                            <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem;">💡 Născut Din Durere Reală</h3>
+                            <p style="font-size: 1rem;">Creat de un părinte care a trăit problema direct — autenticitate și empatie în DNA produsului</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: MARKET -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Oportunitatea de Piață</h2>
+                    
+                    <div class="grid-3">
+                        <div class="stat-card">
+                            <h3 style="color: var(--blue);">TAM</h3>
+                            <div class="stat-number">€1.5B+</div>
+                            <p><strong>Piață globală educație șah</strong></p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 style="color: var(--amber);">SAM</h3>
+                            <div class="stat-number">€200M+</div>
+                            <p><strong>Piață europeană</strong></p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 style="color: var(--purple);">SOM (An 1)</h3>
+                            <div class="stat-number">€150K</div>
+                            <p><strong>Țintă ARR</strong></p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem; background: rgba(139, 122, 196, 0.1); padding: 2.5rem; border-radius: 20px;">
+                        <h3 class="text-center" style="margin-bottom: 2rem;">De Ce România Întâi?</h3>
+                        <div class="grid-3">
+                            <div class="text-center">
+                                <div style="font-size: 3rem;">🇷🇴</div>
+                                <p><strong>Cultură șah</strong></p>
+                                <p style="font-size: 1rem;">100K+ activi</p>
+                            </div>
+                            <div class="text-center">
+                                <div style="font-size: 3rem;">💡</div>
+                                <p><strong>Cost Achiziție Client mai mic</strong></p>
+                                <p style="font-size: 1rem;">Product-market fit rapid</p>
+                            </div>
+                            <div class="text-center">
+                                <div style="font-size: 3rem;">🚀</div>
+                                <p><strong>UE ready</strong></p>
+                                <p style="font-size: 1rem;">DE, FR, UK next</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: ROADMAP -->
+            <div class="slide">
+                <div class="content-box fade-in">
+                    <h2 class="text-center">Viziunea: 12-24 Luni</h2>
+                    
+                    <div class="grid-3" style="margin-top: 2.5rem;">
+                        <div class="feature-card">
+                            <div style="background: linear-gradient(135deg, var(--blue), #3b82f6); color: white; padding: 0.75rem 1.5rem; border-radius: 15px; margin-bottom: 1rem; font-weight: 800;">
+                                Q2 2026
+                            </div>
+                            <h3>Foundation</h3>
+                            <ul style="font-size: 1rem;">
+                                <li>Chess lesson library</li>
+                                <li>MindHub expansion (20+)</li>
+                                <li>Puzzles playground</li>
+                                <li>Interactive quizzes</li>
+                                <li>1K paid users</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div style="background: linear-gradient(135deg, var(--amber), #fbbf24); color: white; padding: 0.75rem 1.5rem; border-radius: 15px; margin-bottom: 1rem; font-weight: 800;">
+                                Q3 2026
+                            </div>
+                            <h3>Scale</h3>
+                            <ul style="font-size: 1rem;">
+                                <li>Mobile app launch</li>
+                                <li>Game analytics</li>
+                                <li>AI Playground</li>
+                                <li>English language</li>
+                                <li>10K users • €150K ARR</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div style="background: linear-gradient(135deg, var(--purple), #a78bfa); color: white; padding: 0.75rem 1.5rem; border-radius: 15px; margin-bottom: 1rem; font-weight: 800;">
+                                2027
+                            </div>
+                            <h3>Expansion</h3>
+                            <ul style="font-size: 1rem;">
+                                <li>Multi-language (DE, FR)</li>
+                                <li>AI coach conversations</li>
+                                <li>Tournament platform</li>
+                                <li>EU market penetration</li>
+                                <li>100K users • €1.5M ARR</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: CLOSING -->
+            <div class="slide">
+                <div class="content-box text-center fade-in">
+                    <div class="image-card" style="max-width: 700px; margin: 0 auto 3rem;">
+                        <img src="future-champions.png" alt="Future Champions">
+                    </div>
+                    
+                    <h1>Fiecare Copil Merită<br>Un Mindset de <span class="accent">Campion</span></h1>
+                    
+                    <div class="quote-box" style="border-left: none; text-align: center; padding-left: 0; font-size: 1.6rem; max-width: 900px; margin: 2.5rem auto;">
+                        "Nu predăm doar mutări de șah.<br><br>
+                        Predăm 80% care creează campioni:<br>
+                        <span class="accent">Reziliență, curaj și voința de a încerca din nou.</span>"
+                    </div>
+
+                    <div style="margin: 3rem 0;">
+                        <div class="logo" style="font-size: 2.5rem;">
+                            <span class="logo-chess">Chess</span><span class="logo-mindset">Mindset</span><span class="logo-chess">.academy</span>
+                        </div>
+                        <p style="font-size: 1.4rem; font-weight: 600;">Să construim împreună viitorul educației în șah.</p>
+                        <div style="font-weight: 800; font-size: 1.4rem; color: var(--amber); letter-spacing: 2px; margin-top: 1.5rem;">
+                            WWW.CHESSMINDSET.ACADEMY
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-dots" id="navDots"></div>
+        <div class="nav-hint">
+            <span><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+            <span><kbd>Home</kbd> First</span>
+            <span><kbd>End</kbd> Last</span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const wrapper = document.getElementById('slidesWrapper');
+        const dotsContainer = document.getElementById('navDots');
+        const progressBar = document.getElementById('progressBar');
+        const totalSlides = 13;
+
+        const labels = ['Cover', 'Story', 'Problem', 'Solution', 'Platform 1', 'Platform 2', 'Platform 3', 'MindHub', 'Business', 'Advantage', 'Market', 'Roadmap', 'Closing'];
+
+        labels.forEach((label, i) => {
+            const dot = document.createElement('div');
+            dot.className = `dot ${i === 0 ? 'active' : ''}`;
+            dot.setAttribute('data-label', label);
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+
+        function goToSlide(n) {
+            if (n < 0 || n >= totalSlides) return;
+            currentSlide = n;
+            wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+        }
+
+        document.addEventListener('keydown', (e) => {
+            // Allow default behavior for input fields
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                goToSlide(Math.min(currentSlide + 1, totalSlides - 1));
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(Math.max(currentSlide - 1, 0));
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                goToSlide(totalSlides - 1);
+            } else if (e.key === 'PageDown') {
+                e.preventDefault();
+                goToSlide(Math.min(currentSlide + 1, totalSlides - 1));
+            } else if (e.key === 'PageUp') {
+                e.preventDefault();
+                goToSlide(Math.max(currentSlide - 1, 0));
+            }
+        });
+
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => touchStartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', (e) => {
+            const diff = e.changedTouches[0].screenX - touchStartX;
+            if (diff < -50) goToSlide(Math.min(currentSlide + 1, totalSlides - 1));
+            if (diff > 50) goToSlide(Math.max(currentSlide - 1, 0));
+        });
+    </script>
+</body>
+</html>
