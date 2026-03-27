@@ -1027,6 +1027,26 @@
             }
         });
 
+        // Mouse wheel / trackpad vertical scroll navigation
+        let wheelLock = false;
+        document.addEventListener('wheel', (e) => {
+            if (wheelLock) return;
+            if (Math.abs(e.deltaY) < 18) return;
+
+            e.preventDefault();
+            wheelLock = true;
+
+            if (e.deltaY > 0) {
+                goToSlide(Math.min(currentSlide + 1, totalSlides - 1));
+            } else {
+                goToSlide(Math.max(currentSlide - 1, 0));
+            }
+
+            setTimeout(() => {
+                wheelLock = false;
+            }, 420);
+        }, { passive: false });
+
         let touchStartX = 0;
         document.addEventListener('touchstart', (e) => touchStartX = e.changedTouches[0].screenX);
         document.addEventListener('touchend', (e) => {
