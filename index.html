@@ -409,29 +409,44 @@
             z-index: 1000;
         }
 
-        /* Navigation Hint */
-        .nav-hint {
+        /* Side Navigation Buttons */
+        .side-nav-btn {
             position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.85);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            color: white;
-            font-size: 0.85rem;
-            z-index: 100;
-            display: flex;
-            gap: 1.5rem;
-            backdrop-filter: blur(10px);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 150;
+            border: 1px solid rgba(139, 122, 196, 0.35);
+            background: rgba(15, 23, 42, 0.88);
+            color: var(--white);
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+            min-width: 106px;
         }
 
-        .nav-hint kbd {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.25rem 0.65rem;
-            border-radius: 6px;
-            font-family: monospace;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        .side-nav-btn:hover {
+            background: rgba(30, 64, 175, 0.92);
+            border-color: rgba(245, 158, 11, 0.7);
+            transform: translateY(-50%) scale(1.04);
+        }
+
+        .side-nav-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+
+        .side-nav-prev {
+            left: 1.1rem;
+        }
+
+        .side-nav-next {
+            right: 1.1rem;
         }
 
         /* Animations */
@@ -450,6 +465,24 @@
             .grid-2, .grid-3 {
                 grid-template-columns: 1fr;
             }
+            .nav-dots {
+                right: 0.9rem;
+            }
+            .side-nav-btn {
+                min-width: 44px;
+                width: 44px;
+                height: 44px;
+                border-radius: 999px;
+                padding: 0;
+                font-size: 1.25rem;
+                line-height: 1;
+            }
+            .side-nav-prev {
+                left: 0.7rem;
+            }
+            .side-nav-next {
+                right: 0.7rem;
+            }
         }
 
         /* Print */
@@ -457,7 +490,7 @@
             body { overflow: visible; }
             .slides-wrapper { display: block; transform: none !important; }
             .slide { page-break-after: always; }
-            .nav-dots, .nav-hint, .progress-bar { display: none; }
+            .nav-dots, .side-nav-btn, .progress-bar { display: none; }
         }
         @page { size: landscape; margin: 0; }
     </style>
@@ -933,11 +966,8 @@
 
         <!-- Navigation -->
         <div class="nav-dots" id="navDots"></div>
-        <div class="nav-hint">
-            <span><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
-            <span><kbd>Home</kbd> First</span>
-            <span><kbd>End</kbd> Last</span>
-        </div>
+        <button type="button" id="prevBtn" class="side-nav-btn side-nav-prev" aria-label="Previous slide">← Previous</button>
+        <button type="button" id="nextBtn" class="side-nav-btn side-nav-next" aria-label="Next slide">Next →</button>
     </div>
 
     <script>
@@ -945,6 +975,8 @@
         const wrapper = document.getElementById('slidesWrapper');
         const dotsContainer = document.getElementById('navDots');
         const progressBar = document.getElementById('progressBar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
         const totalSlides = 13;
 
         const labels = ['Cover', 'Story', 'Problem', 'Solution', 'Platform 1', 'Platform 2', 'Platform 3', 'MindHub', 'Business', 'Advantage', 'Market', 'Roadmap', 'Closing'];
@@ -963,7 +995,12 @@
             wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
             progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
             document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
         }
+
+        prevBtn.addEventListener('click', () => goToSlide(Math.max(currentSlide - 1, 0)));
+        nextBtn.addEventListener('click', () => goToSlide(Math.min(currentSlide + 1, totalSlides - 1)));
 
         document.addEventListener('keydown', (e) => {
             // Allow default behavior for input fields
@@ -997,6 +1034,8 @@
             if (diff < -50) goToSlide(Math.min(currentSlide + 1, totalSlides - 1));
             if (diff > 50) goToSlide(Math.max(currentSlide - 1, 0));
         });
+
+        goToSlide(0);
     </script>
 </body>
 </html>
