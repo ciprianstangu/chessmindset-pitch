@@ -79,6 +79,36 @@
             justify-content: center;
         }
 
+        /* Closing Slide Fit */
+        .slide-closing .content-box {
+            min-height: auto;
+            padding: 1.75rem 2.25rem;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .closing-hero-image {
+            max-width: 540px;
+            margin: 0 auto 1rem;
+        }
+
+        .closing-hero-image img {
+            max-height: 220px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .closing-quote {
+            margin: 1rem auto;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            max-width: 860px;
+        }
+
+        .closing-footer {
+            margin: 1rem 0 0;
+        }
+
         /* Typography */
         h1, h2 {
             font-family: 'Cormorant Garamond', serif;
@@ -464,6 +494,40 @@
             }
             .grid-2, .grid-3 {
                 grid-template-columns: 1fr;
+            }
+            .slide-closing .content-box {
+                padding: 1.2rem 1.1rem;
+            }
+            .closing-hero-image {
+                max-width: 320px;
+                margin-bottom: 0.6rem;
+            }
+            .closing-hero-image img {
+                max-height: 130px;
+            }
+            .slide-closing h1 {
+                font-size: clamp(1.8rem, 6.2vw, 2.4rem);
+                margin-bottom: 0.7rem;
+                line-height: 1.2;
+            }
+            .closing-quote {
+                font-size: 1rem;
+                margin: 0.6rem auto;
+                line-height: 1.4;
+            }
+            .closing-footer {
+                margin-top: 0.4rem;
+            }
+            .closing-footer .logo {
+                font-size: 1.7rem !important;
+                margin-bottom: 0.65rem;
+            }
+            .closing-footer p {
+                font-size: 1.02rem !important;
+            }
+            .closing-footer div {
+                font-size: 1rem !important;
+                margin-top: 0.7rem !important;
             }
             .nav-dots {
                 right: 0.9rem;
@@ -936,21 +1000,21 @@
             </div>
 
             <!-- SLIDE 11: CLOSING -->
-            <div class="slide">
+            <div class="slide slide-closing">
                 <div class="content-box text-center fade-in">
-                    <div class="image-card" style="max-width: 700px; margin: 0 auto 3rem;">
+                    <div class="image-card closing-hero-image">
                         <img src="future-champions.png" alt="Future Champions">
                     </div>
                     
                     <h1>Fiecare Copil Merită<br>Un Mindset de <span class="accent">Campion</span></h1>
                     
-                    <div class="quote-box" style="border-left: none; text-align: center; padding-left: 0; font-size: 1.6rem; max-width: 900px; margin: 2.5rem auto;">
+                    <div class="quote-box closing-quote" style="border-left: none; text-align: center; padding-left: 0;">
                         "Nu predăm doar mutări de șah.<br><br>
                         Predăm 80% care creează campioni:<br>
                         <span class="accent">Reziliență, curaj și voința de a încerca din nou.</span>"
                     </div>
 
-                    <div style="margin: 3rem 0;">
+                    <div class="closing-footer">
                         <div class="logo" style="font-size: 2.5rem;">
                             <span class="logo-chess">Chess</span><span class="logo-mindset">Mindset</span><span class="logo-chess">.academy</span>
                         </div>
